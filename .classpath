@@ -3,6 +3,8 @@
 	<classpathentry kind="lib" path="/Applications/jar/gson-2.8.6.jar"/>
 	<classpathentry kind="lib" path="/Applications/jar/gson-2.8.6-sources.jar"/>
 	<classpathentry kind="lib" path="/Applications/jar/gson-2.8.6-javadoc.jar"/>
+	<classpathentry kind="lib" path="mysql-connector-java-8.0.20.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mysql-connector-java-8.0.20.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java8">
 		<attributes>

@@ -12,8 +12,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import bean.JsonBean;
-
-
+import dao.DAOManager;
 
 /**
  * Servlet implementation class JsonServlet
@@ -34,25 +33,26 @@ public class JsonServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		JsonBean jsonBeanList[] = new JsonBean[2];
 		//Javaオブジェクトに値をセット
         JsonBean jsonBean = new JsonBean();
-        jsonBean.setId("1");
-        jsonBean.setName("tanaka");
-        JsonBean jsonBean2 = new JsonBean();
-        jsonBean2.setId("2");
-        jsonBean2.setName("yamada");
-        jsonBeanList[0] = jsonBean;
-        jsonBeanList[1] = jsonBean2;
 
 
+        //String str = request.getParameter("id");
+        String str = "2";
+
+        int requestId = Integer.parseInt(str);
+
+        DAOManager dao = new DAOManager();
+
+        String name = dao.searchEmployee(requestId);
+        System.out.println("name"+name);
+        jsonBean.setId(str);
+        jsonBean.setName(name);
         ObjectMapper mapper = new ObjectMapper();
         try {
             //JavaオブジェクトからJSONに変換
-
-            String testJson = mapper.writeValueAsString(jsonBeanList);
-;
+            String testJson = mapper.writeValueAsString(jsonBean);
+            System.out.println(testJson);
             //JSONの出力
             response.getWriter().write(testJson);
 
@@ -60,17 +60,40 @@ public class JsonServlet extends HttpServlet {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-
 	}
-
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
+		//Javaオブジェクトに値をセット
+        JsonBean jsonBean = new JsonBean();
+
+
+        String str = request.getParameter("id");
+//        String str = "1";
+
+        int requestId = Integer.parseInt(str);
+
+        DAOManager dao = new DAOManager();
+
+        String name = dao.searchEmployee(requestId);
+        System.out.println("name"+name);
+        jsonBean.setId(str);
+        jsonBean.setName(name);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            //JavaオブジェクトからJSONに変換
+            String testJson = mapper.writeValueAsString(jsonBean);
+            System.out.println(testJson);
+            //JSONの出力
+            response.getWriter().write(testJson);
+
+            System.out.println(testJson);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
 	}
 
 }
