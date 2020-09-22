@@ -12,7 +12,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import bean.JsonBean;
-import dao.DAOManager;
 
 /**
  * Servlet implementation class JsonServlet
@@ -41,13 +40,15 @@ public class JsonServlet extends HttpServlet {
         String str = "2";
 
         int requestId = Integer.parseInt(str);
-
-        DAOManager dao = new DAOManager();
-
-        String name = dao.searchEmployee(requestId);
-        System.out.println("name"+name);
-        jsonBean.setId(str);
-        jsonBean.setName(name);
+        // TODO RDS接続まで一旦コメントアウト
+//        DAOManager dao = new DAOManager();
+//
+//        String name = dao.searchEmployee(requestId);
+//        System.out.println("name"+name);
+//        jsonBean.setId(str);
+//        jsonBean.setName(name);
+        jsonBean.setId("demoid");
+        jsonBean.setName("demoname");
         ObjectMapper mapper = new ObjectMapper();
         try {
             //JavaオブジェクトからJSONに変換
@@ -76,12 +77,15 @@ public class JsonServlet extends HttpServlet {
 
         int requestId = Integer.parseInt(str);
 
-        DAOManager dao = new DAOManager();
-
-        String name = dao.searchEmployee(requestId);
-        System.out.println("name"+name);
-        jsonBean.setId(str);
-        jsonBean.setName(name);
+        // TODO 以下、RDS接続まで一旦コメントアウト
+//        DAOManager dao = new DAOManager();
+//
+//        String name = dao.searchEmployee(requestId);
+//        System.out.println("name"+name);
+//        jsonBean.setId(str);
+//        jsonBean.setName(name);
+        jsonBean.setId("demoid");
+        jsonBean.setName("demoname");
         ObjectMapper mapper = new ObjectMapper();
         try {
             //JavaオブジェクトからJSONに変換
