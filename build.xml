@@ -3,99 +3,110 @@
               Any modifications will be overwritten.
               To include a user specific buildfile here, simply create one in the same
               directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. --><project basedir="." default="build" name="servlet_test">
-    <property environment="env"/>
-    <property name="ECLIPSE_HOME" value="../../Eclipse/"/>
-    <property name="debuglevel" value="source,lines,vars"/>
-    <property name="target" value="1.8"/>
-    <property name="source" value="1.8"/>
-    <path id="Apache Tomcat v8.5 [Tomcat8 (Java8)].libraryclasspath">
-        <pathelement location="../../tomcat/8/lib/tomcat-i18n-ko.jar"/>
-        <pathelement location="../../tomcat/8/lib/el-api.jar"/>
-        <pathelement location="../../tomcat/8/lib/tomcat-i18n-es.jar"/>
-        <pathelement location="../../tomcat/8/lib/tomcat-websocket.jar"/>
-        <pathelement location="../../tomcat/8/lib/jasper.jar"/>
-        <pathelement location="../../tomcat/8/lib/jasper-el.jar"/>
-        <pathelement location="../../tomcat/8/lib/tomcat-util.jar"/>
-        <pathelement location="../../tomcat/8/lib/tomcat-i18n-de.jar"/>
-        <pathelement location="../../tomcat/8/lib/mysql-connector-java-8.0.19.jar"/>
-        <pathelement location="../../tomcat/8/lib/catalina-storeconfig.jar"/>
-        <pathelement location="../../tomcat/8/lib/jsp-api.jar"/>
-        <pathelement location="../../tomcat/8/lib/catalina-tribes.jar"/>
-        <pathelement location="../../tomcat/8/lib/catalina.jar"/>
-        <pathelement location="../../tomcat/8/lib/tomcat-jni.jar"/>
-        <pathelement location="../../tomcat/8/lib/websocket-api.jar"/>
-        <pathelement location="../../tomcat/8/lib/tomcat-coyote.jar"/>
-        <pathelement location="../../tomcat/8/lib/catalina-ha.jar"/>
-        <pathelement location="../../tomcat/8/lib/tomcat-api.jar"/>
-        <pathelement location="../../tomcat/8/lib/annotations-api.jar"/>
-        <pathelement location="../../tomcat/8/lib/jaspic-api.jar"/>
-        <pathelement location="../../tomcat/8/lib/tomcat-i18n-zh-CN.jar"/>
-        <pathelement location="../../tomcat/8/lib/catalina-ant.jar"/>
-        <pathelement location="../../tomcat/8/lib/ecj-4.6.3.jar"/>
-        <pathelement location="../../tomcat/8/lib/servlet-api.jar"/>
-        <pathelement location="../../tomcat/8/lib/tomcat-util-scan.jar"/>
-        <pathelement location="../../tomcat/8/lib/tomcat-i18n-ja.jar"/>
-        <pathelement location="../../tomcat/8/lib/tomcat-i18n-ru.jar"/>
-        <pathelement location="../../tomcat/8/lib/tomcat-jdbc.jar"/>
-        <pathelement location="../../tomcat/8/lib/tomcat-i18n-fr.jar"/>
-        <pathelement location="../../tomcat/8/lib/tomcat-dbcp.jar"/>
-    </path>
-    <path id="Web App ライブラリー.libraryclasspath">
-        <pathelement location="WebContent/WEB-INF/lib/jackson-annotations-2.11.0.rc1.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/jackson-core-2.11.0.rc1.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/jackson-databind-2.11.0.rc1.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/mysql-connector-java-8.0.20.jar"/>
-    </path>
-    <path id="EAR ライブラリー.libraryclasspath"/>
-    <path id="servlet_test.classpath">
-        <pathelement location="../../../../jar/gson-2.8.6.jar"/>
-        <pathelement location="../../../../jar/gson-2.8.6-sources.jar"/>
-        <pathelement location="../../../../jar/gson-2.8.6-javadoc.jar"/>
-        <pathelement location="mysql-connector-java-8.0.20.jar"/>
-        <pathelement location="WebContent/WEB-INF/lib/mysql-connector-java-8.0.20.jar"/>
-        <pathelement location="build/classes"/>
-        <path refid="Apache Tomcat v8.5 [Tomcat8 (Java8)].libraryclasspath"/>
-        <path refid="Web App ライブラリー.libraryclasspath"/>
-        <path refid="EAR ライブラリー.libraryclasspath"/>
-        <pathelement location="jackson-annotations-2.11.0.rc1.jar"/>
-        <pathelement location="jackson-core-2.11.0.rc1.jar"/>
-        <pathelement location="jackson-databind-2.11.0.rc1.jar"/>
-    </path>
-    <target name="init">
-        <mkdir dir="build/classes"/>
-        <copy includeemptydirs="false" todir="build/classes">
-            <fileset dir="src">
-                <exclude name="**/*.launch"/>
-                <exclude name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="clean">
-        <delete dir="build/classes"/>
-    </target>
-    <target depends="clean" name="cleanall"/>
-    <target depends="build-subprojects,build-project" name="build"/>
-    <target name="build-subprojects"/>
-    <target depends="init" name="build-project">
-        <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="build/classes" includeantruntime="false" source="${source}" target="${target}">
-            <src path="src"/>
-            <classpath refid="servlet_test.classpath"/>
-        </javac>
-    </target>
-    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
-    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
-        <copy todir="${ant.library.dir}">
-            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
-        </copy>
-        <unzip dest="${ant.library.dir}">
-            <patternset includes="jdtCompilerAdapter.jar"/>
-            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
-        </unzip>
-    </target>
-    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
-        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
-        <antcall target="build"/>
-    </target>
+              as the first entry and export the buildfile again. -->
+<project basedir="." default="build" name="servlet_test">
+	<property environment="env" />
+	<property name="ECLIPSE_HOME" value="../../Eclipse/" />
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="target" value="1.8" />
+	<property name="source" value="1.8" />
+	<path id="Apache Tomcat v8.5 [Tomcat8 (Java8)].libraryclasspath">
+		<pathelement location="../../tomcat/8/lib/tomcat-i18n-ko.jar" />
+		<pathelement location="../../tomcat/8/lib/el-api.jar" />
+		<pathelement location="../../tomcat/8/lib/tomcat-i18n-es.jar" />
+		<pathelement location="../../tomcat/8/lib/tomcat-websocket.jar" />
+		<pathelement location="../../tomcat/8/lib/jasper.jar" />
+		<pathelement location="../../tomcat/8/lib/jasper-el.jar" />
+		<pathelement location="../../tomcat/8/lib/tomcat-util.jar" />
+		<pathelement location="../../tomcat/8/lib/tomcat-i18n-de.jar" />
+		<pathelement location="../../tomcat/8/lib/mysql-connector-java-8.0.19.jar" />
+		<pathelement location="../../tomcat/8/lib/catalina-storeconfig.jar" />
+		<pathelement location="../../tomcat/8/lib/jsp-api.jar" />
+		<pathelement location="../../tomcat/8/lib/catalina-tribes.jar" />
+		<pathelement location="../../tomcat/8/lib/catalina.jar" />
+		<pathelement location="../../tomcat/8/lib/tomcat-jni.jar" />
+		<pathelement location="../../tomcat/8/lib/websocket-api.jar" />
+		<pathelement location="../../tomcat/8/lib/tomcat-coyote.jar" />
+		<pathelement location="../../tomcat/8/lib/catalina-ha.jar" />
+		<pathelement location="../../tomcat/8/lib/tomcat-api.jar" />
+		<pathelement location="../../tomcat/8/lib/annotations-api.jar" />
+		<pathelement location="../../tomcat/8/lib/jaspic-api.jar" />
+		<pathelement location="../../tomcat/8/lib/tomcat-i18n-zh-CN.jar" />
+		<pathelement location="../../tomcat/8/lib/catalina-ant.jar" />
+		<pathelement location="../../tomcat/8/lib/ecj-4.6.3.jar" />
+		<pathelement location="../../tomcat/8/lib/servlet-api.jar" />
+		<pathelement location="../../tomcat/8/lib/tomcat-util-scan.jar" />
+		<pathelement location="../../tomcat/8/lib/tomcat-i18n-ja.jar" />
+		<pathelement location="../../tomcat/8/lib/tomcat-i18n-ru.jar" />
+		<pathelement location="../../tomcat/8/lib/tomcat-jdbc.jar" />
+		<pathelement location="../../tomcat/8/lib/tomcat-i18n-fr.jar" />
+		<pathelement location="../../tomcat/8/lib/tomcat-dbcp.jar" />
+	</path>
+	<path id="Web App ライブラリー.libraryclasspath">
+		<pathelement location="WebContent/WEB-INF/lib/jackson-annotations-2.11.0.rc1.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/jackson-core-2.11.0.rc1.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/jackson-databind-2.11.0.rc1.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/mysql-connector-java-8.0.20.jar" />
+	</path>
+	<path id="EAR ライブラリー.libraryclasspath" />
+	<path id="servlet_test.classpath">
+		<pathelement location="../../../../jar/gson-2.8.6.jar" />
+		<pathelement location="../../../../jar/gson-2.8.6-sources.jar" />
+		<pathelement location="../../../../jar/gson-2.8.6-javadoc.jar" />
+		<pathelement location="mysql-connector-java-8.0.20.jar" />
+		<pathelement location="WebContent/WEB-INF/lib/mysql-connector-java-8.0.20.jar" />
+		<pathelement location="build/classes" />
+		<path refid="Apache Tomcat v8.5 [Tomcat8 (Java8)].libraryclasspath" />
+		<path refid="Web App ライブラリー.libraryclasspath" />
+		<path refid="EAR ライブラリー.libraryclasspath" />
+		<pathelement location="jackson-annotations-2.11.0.rc1.jar" />
+		<pathelement location="jackson-core-2.11.0.rc1.jar" />
+		<pathelement location="jackson-databind-2.11.0.rc1.jar" />
+	</path>
+	<target name="init">
+		<mkdir dir="build/classes" />
+		<copy includeemptydirs="false" todir="build/classes">
+			<fileset dir="src">
+				<exclude name="**/*.launch" />
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+	</target>
+	<target name="clean">
+		<delete dir="build/classes" />
+	</target>
+	<target depends="clean" name="cleanall" />
+	<target depends="build-subprojects,build-project" name="build" />
+	<target name="build-subprojects" />
+	<target depends="init" name="build-project">
+		<echo message="${ant.project.name}: ${ant.file}" />
+		<javac debug="true" debuglevel="${debuglevel}" destdir="build/classes" includeantruntime="false" source="${source}" target="${target}">
+			<src path="src" />
+			<classpath refid="servlet_test.classpath" />
+		</javac>
+	</target>
+	<target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects" />
+	<target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+		<copy todir="${ant.library.dir}">
+			<fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar" />
+		</copy>
+		<unzip dest="${ant.library.dir}">
+			<patternset includes="jdtCompilerAdapter.jar" />
+			<fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar" />
+		</unzip>
+	</target>
+	<target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+		<property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter" />
+		<antcall target="build" />
+	</target>
+	<target name="war" depends="init">
+		<delete dir="${build.production.dir}" />
+		<mkdir dir="${build.production.dir}" />
+		<copy todir="${build.production.dir}" overwrite="true">
+			<fileset dir="${src.main.webapp}" />
+		</copy>
+
+		<property environment="env" />
+		<zip destfile="${build.dir}/servlet_test.war" basedir="${build.production.dir}" />
+	</target>
 </project>
