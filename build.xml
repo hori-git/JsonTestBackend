@@ -100,7 +100,7 @@
 		<antcall target="build" />
 	</target>
 	<target depends="build" name="deploy">
-		<war destfile="target">
+		<war destfile="target" webxml="WebContent/WEB-INF/web.xml">
 			<fileset dir="WebContent" />
 			<classes dir="build/classes" />
 		</war>
