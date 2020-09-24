@@ -105,7 +105,7 @@
 		<zip destfile="workspace/target" />
 	</target>-->
 	<target depends="init" name="war">
-		<war destfile="workspace/target/servlet_test.war" webxml="WebContent/WEB-INF/web.xml">
+		<war destfile="target/servlet_test.war" webxml="WebContent/WEB-INF/web.xml">
 			<fileset dir="WebContent" />
 			<classes dir="build/classes" />
 		</war>
