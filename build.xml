@@ -99,15 +99,13 @@
 		<property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter" />
 		<antcall target="build" />
 	</target>
-
-	<!--<target name="war" depends="init">
-		<property environment="env" />
-		<zip destfile="workspace/target" />
-	</target>-->
-	<target depends="init" name="war">
+	<!--	<target depends="init" name="war">
 		<war destfile="target/servlet_test.war" webxml="WebContent/WEB-INF/web.xml">
 			<fileset dir="WebContent" />
 			<classes dir="build/classes" />
 		</war>
+	</target>-->
+	<target name="dist">
+		<jar destfile="target/servlet_test.war"  basedir="."/>
 	</target>
 </project>
