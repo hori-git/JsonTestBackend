@@ -106,6 +106,8 @@
 		</war>
 	</target>-->
 	<target name="dist">
+		<delete dir="target" />
+		<mkdir dir="target" />
 		<jar destfile="target/servlet_test.war"  basedir="."/>
 	</target>
 </project>
