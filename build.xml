@@ -106,11 +106,11 @@
 		</war>
 	</target>-->
 	<target name="war" depends="init">
-		<delete dir="target" />
-		<mkdir dir="target" />
-		<copy todir="target" overwrite="true">
-			<fileset dir="src" />
+		<delete dir="./target/dist/ROOT" />
+		<mkdir dir="./target/dist/ROOT" />
+		<copy todir="./target/dist/ROOT" overwrite="true">
+			<fileset dir="./src" />
 		</copy>
-		<zip destfile="target/servlet_test.war" basedir="." />
+		<zip destfile="./target/dist/ROOT.war" basedir="./target/dist/ROOT" />
 	</target>
 </project>
