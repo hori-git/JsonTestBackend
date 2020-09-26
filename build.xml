@@ -105,9 +105,12 @@
 			<classes dir="build/classes" />
 		</war>
 	</target>-->
-	<target name="dist">
+	<target name="war" depends="init">
 		<delete dir="target" />
 		<mkdir dir="target" />
-		<jar destfile="target/servlet_test.war" basedir="." />
+		<copy todir="target" overwrite="true">
+			<fileset dir="src" />
+		</copy>
+		<zip destfile="target/servlet_test.war" basedir="." />
 	</target>
 </project>
